@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -59,7 +60,6 @@ class ProfileViewController: UIViewController {
             height: 100)
         image.alpha = 0
 
-        //image.translatesAutoresizingMaskIntoConstraints = false
         
         
         return image
@@ -74,8 +74,15 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        
+        
+        
+        #if DEBUG
+        tableView.backgroundColor = .white
+        #else
+        tableView.backgroundColor = .red
+        #endif
+        
         setupConstraints()
         setupTableView()
         
@@ -189,9 +196,6 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileTableHederView.self)) as? ProfileTableHederView else {return nil}
-//
-        
         
             return headerView
 
@@ -269,7 +273,6 @@ extension ProfileViewController: UITableViewDelegate {
             self.secondAvatar.layer.cornerRadius = 50
             
             
-//            self.secondAvatar.alpha = 1
             self.transptView.alpha = 0
             self.closeButton.alpha = 0
          }

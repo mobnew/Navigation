@@ -8,23 +8,27 @@
 import UIKit
 
 
-struct Post {
+public struct Post {
     
-    let title: String
+    public let title: String
+    public init(title: String) {
+                self.title = title
+                }
 }
 
 
-struct PostCartoon {
-    let author: String
-    let description: String
-    let image: UIImage
-    let likes: Int
-    let views: Int
+
+public struct PostCartoon {
+    public let author: String
+    public let description: String
+    public let image: UIImage
+    public let likes: Int
+    public let views: Int
 }
 
 
-struct Storage {
-    static let tableModel = [
+public struct Storage {
+   public static let tableModel = [
         PostCartoon (author: "Мэтт Гроунинг",
                  description: "«Футура́ма» — американский научно-фантастический сатирический мультсериал, созданный в студии 20th Century Fox Мэттом Грейнингом и Дэвидом Коэном, авторами мультсериала «Симпсоны». В большинстве серий действие сериала происходит в Новом Нью-Йорке в XXXI веке",
                  image: #imageLiteral(resourceName: "futurama"),
