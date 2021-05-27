@@ -34,7 +34,7 @@ class ProfileTableViewCell: UITableViewCell {
     }()
     
     
-    private let cartoonImageView: UIImageView = {
+    private var cartoonImageView: UIImageView = {
        let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black

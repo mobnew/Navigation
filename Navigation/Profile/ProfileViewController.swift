@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SnapKit
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
@@ -58,8 +60,6 @@ class ProfileViewController: UIViewController {
             width: 100,
             height: 100)
         image.alpha = 0
-
-        //image.translatesAutoresizingMaskIntoConstraints = false
         
         
         return image
@@ -115,15 +115,9 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        let constraints = [
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+        tableView.snp.makeConstraints{ (make) -> Void in
+            make.edges.equalToSuperview()
+        }
     }
    
 }
@@ -165,11 +159,40 @@ extension ProfileViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as! ProfileTableViewCell
             
-            let cartoon = Storage.tableModel[indexPath.row]
+            var cartoon = Storage.tableModel[indexPath.row]
+            
+            let srcImage = Storage.tableModel[indexPath.row].image
+            
+            switch indexPath.row {
+            case 0:
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .fade) { image in
+                    cartoon.image = image!
+                }
+                
+            case 1:
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .chrome) { image in
+                    cartoon.image = image!
+                }
+                
+            case 2:
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .colorInvert) { image in
+                    cartoon.image = image!
+                }
+                
+            default:
+                    ImageProcessor().processImage(sourceImage: srcImage, filter: .fade) { image in
+                        cartoon.image = image!
+                    
+            }
+        }
+           
+            
             cell.cartoon = cartoon
             
+            
             return cell
-        }
+                    
+                }
         
 
         
@@ -189,8 +212,6 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileTableHederView.self)) as? ProfileTableHederView else {return nil}
-//
         
         
             return headerView
@@ -269,7 +290,6 @@ extension ProfileViewController: UITableViewDelegate {
             self.secondAvatar.layer.cornerRadius = 50
             
             
-//            self.secondAvatar.alpha = 1
             self.transptView.alpha = 0
             self.closeButton.alpha = 0
          }

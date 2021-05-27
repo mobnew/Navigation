@@ -17,7 +17,7 @@ struct Post {
 struct PostCartoon {
     let author: String
     let description: String
-    let image: UIImage
+    var image: UIImage
     let likes: Int
     let views: Int
 }
@@ -27,7 +27,7 @@ struct Storage {
     static let tableModel = [
         PostCartoon (author: "Мэтт Гроунинг",
                  description: "«Футура́ма» — американский научно-фантастический сатирический мультсериал, созданный в студии 20th Century Fox Мэттом Грейнингом и Дэвидом Коэном, авторами мультсериала «Симпсоны». В большинстве серий действие сериала происходит в Новом Нью-Йорке в XXXI веке",
-                 image: #imageLiteral(resourceName: "futurama"),
+                 image:  #imageLiteral(resourceName: "futurama"),
                  likes: 1245,
                  views: 5300),
         PostCartoon (author: "Сет Макфарлейн",
