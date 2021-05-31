@@ -115,7 +115,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        tableView.snp.makeConstraints{ (make) -> Void in
+        tableView.snp.makeConstraints{ make in
             make.edges.equalToSuperview()
         }
     }
@@ -158,10 +158,8 @@ extension ProfileViewController: UITableViewDataSource {
         else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as! ProfileTableViewCell
-            
             var cartoon = Storage.tableModel[indexPath.row]
-            
-            let srcImage = Storage.tableModel[indexPath.row].image
+            let srcImage = cartoon.image
             
             switch indexPath.row {
             case 0:
@@ -180,22 +178,14 @@ extension ProfileViewController: UITableViewDataSource {
                 }
                 
             default:
-                    ImageProcessor().processImage(sourceImage: srcImage, filter: .fade) { image in
-                        cartoon.image = image!
-                    
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .fade) { image in
+                    cartoon.image = image!
+                }
             }
-        }
-           
             
             cell.cartoon = cartoon
-            
-            
             return cell
-                    
-                }
-        
-
-        
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -205,17 +195,13 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-
 }
 
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        
             return headerView
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -262,9 +248,8 @@ extension ProfileViewController: UITableViewDelegate {
                 width: self.view.frame.width,
                 height: self.view.frame.width)
             self.secondAvatar.layer.cornerRadius = 0
-            
-            
                }
+        
         let doCancelButton = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
 
             self.headerView.addSubview(self.closeButton)
@@ -280,21 +265,16 @@ extension ProfileViewController: UITableViewDelegate {
         
         backgroundAnimation.startAnimation()
         doCancelButton.startAnimation(afterDelay: 0.5)
-        
     }
-    
     
     @objc func closeFunc() {
         let         backImageAnimation = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
             self.secondAvatar.frame = .init(x: 16, y: 16, width: 100, height: 100)
             self.secondAvatar.layer.cornerRadius = 50
             
-            
             self.transptView.alpha = 0
             self.closeButton.alpha = 0
          }
-        
-        
         backImageAnimation.startAnimation()
     }
 }
