@@ -13,15 +13,13 @@ struct Post {
     let title: String
 }
 
-
 struct PostCartoon {
     let author: String
     let description: String
-    let image: UIImage
+    var image: UIImage
     let likes: Int
     let views: Int
 }
-
 
 struct Storage {
     static let tableModel = [

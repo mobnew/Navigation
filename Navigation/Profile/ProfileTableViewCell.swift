@@ -17,10 +17,8 @@ class ProfileTableViewCell: UITableViewCell {
             cartoonDescriptionLabel.text = cartoon?.description
             likesLabel.text = "Likes: \(cartoon!.likes)"
             viewsLabel.text = "Views: \(cartoon!.views)"
-            
         }
     }
-    
     
     private let cartoonTitleLabel: UILabel = {
         let label = UILabel()
@@ -33,8 +31,7 @@ class ProfileTableViewCell: UITableViewCell {
         return label
     }()
     
-    
-    private let cartoonImageView: UIImageView = {
+    private var cartoonImageView: UIImageView = {
        let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.backgroundColor = .black
@@ -70,7 +67,6 @@ class ProfileTableViewCell: UITableViewCell {
         return views
     }()
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -80,7 +76,6 @@ class ProfileTableViewCell: UITableViewCell {
         contentView.addSubview(likesLabel)
         contentView.addSubview(viewsLabel)
         
-        
         let constraints = [
             
             cartoonTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 16),
@@ -88,30 +83,22 @@ class ProfileTableViewCell: UITableViewCell {
             cartoonTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             cartoonTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 
-            
-            
             cartoonImageView.topAnchor.constraint(equalTo: cartoonTitleLabel.bottomAnchor,constant: 16),
             cartoonImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             cartoonImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             cartoonImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor),
             cartoonImageView.widthAnchor.constraint(equalTo: cartoonImageView.heightAnchor),
 
-            
             cartoonDescriptionLabel.topAnchor.constraint(equalTo: cartoonImageView.bottomAnchor,constant: 16),
             cartoonDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             cartoonDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
            
-            
-            
             likesLabel.topAnchor.constraint(equalTo: cartoonDescriptionLabel.bottomAnchor, constant: 16),
             likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
             
             viewsLabel.topAnchor.constraint(equalTo: cartoonDescriptionLabel.bottomAnchor, constant: 16),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-            
-            
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -124,8 +111,6 @@ class ProfileTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

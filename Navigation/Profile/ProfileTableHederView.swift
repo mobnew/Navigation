@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 
 class ProfileTableHederView: UITableViewHeaderFooterView {
     
@@ -19,19 +19,15 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
             return profileHV
         }()
     
-    
      let image: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.image = UIImage(named: "homer")
-        
         image.layer.cornerRadius = 100 / 2
         image.clipsToBounds = true
-        
         image.layer.borderWidth = 3
         image.layer.backgroundColor = UIColor.white.cgColor
         image.layer.borderColor = UIColor.white.cgColor
-
         image.translatesAutoresizingMaskIntoConstraints = false
         
         return image
@@ -64,9 +60,7 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
         return button
-    
     }()
-    
     
     private let labelStatus: UILabel = {
         let labelStatus = UILabel()
@@ -94,16 +88,13 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         
         textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
-        
         return textField
     }()
     
     private var statusText: String  = ""
     
-    
     override init(reuseIdentifier: String?) {
            super.init(reuseIdentifier: reuseIdentifier)
-        
         
         contentView.addSubview(profileHeaderView)
         profileHeaderView.addSubview(image)
@@ -112,47 +103,42 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         profileHeaderView.addSubview(textField)
         profileHeaderView.addSubview(labelStatus)
         
+        profileHeaderView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(220)
+        }
         
+        image.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().offset(16)
+            make.height.width.equalTo(100)
+        }
         
+        labelName.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(27)
+            make.leading.equalTo(image.snp.trailing).offset(20)
+        }
         
+        button.snp.makeConstraints { make in
+            make.top.equalTo(image.snp.bottom).offset(36)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(50)
+        }
         
-        let constraints = [
-            profileHeaderView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            profileHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            
-            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            image.heightAnchor.constraint(equalToConstant: 100),
-            image.widthAnchor.constraint(equalTo: image.heightAnchor),
-            
-            labelName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 27),
-            labelName.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 20),
-            
-            button.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 36),
-            button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            button.widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -16 * 2),
-            button.heightAnchor.constraint(equalToConstant: 50),
-            
-            textField.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 20),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            textField.heightAnchor.constraint(equalToConstant: 40),
-            textField.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -16),
-            
-            labelStatus.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
-            labelStatus.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -16)
-            
-        ]
+        textField.snp.makeConstraints { make in
+            make.leading.equalTo(image.snp.trailing).offset(20)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(40)
+            make.bottom.equalTo(button.snp.top).offset(-16)
+        }
         
-        NSLayoutConstraint.activate(constraints)
-        
-        
+        labelStatus.snp.makeConstraints { make in
+            make.leading.equalTo(textField.snp.leading)
+            make.bottom.equalTo(textField.snp.top).offset(-16)
+        }
         
        }
        
-
        required init?(coder: NSCoder) {
            fatalError("init(coder:) has not been implemented")
        }
@@ -166,8 +152,6 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         statusText = textField.text ?? "No text"
         
     }
-    
-    
 }
 
 

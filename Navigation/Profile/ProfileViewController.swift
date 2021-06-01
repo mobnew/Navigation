@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SnapKit
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
@@ -58,8 +60,6 @@ class ProfileViewController: UIViewController {
             width: 100,
             height: 100)
         image.alpha = 0
-
-        //image.translatesAutoresizingMaskIntoConstraints = false
         
         
         return image
@@ -115,15 +115,9 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        let constraints = [
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+        tableView.snp.makeConstraints{ make in
+            make.edges.equalToSuperview()
+        }
     }
    
 }
@@ -164,15 +158,34 @@ extension ProfileViewController: UITableViewDataSource {
         else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as! ProfileTableViewCell
+            var cartoon = Storage.tableModel[indexPath.row]
+            let srcImage = cartoon.image
             
-            let cartoon = Storage.tableModel[indexPath.row]
+            switch indexPath.row {
+            case 0:
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .fade) { image in
+                    cartoon.image = image!
+                }
+                
+            case 1:
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .chrome) { image in
+                    cartoon.image = image!
+                }
+                
+            case 2:
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .colorInvert) { image in
+                    cartoon.image = image!
+                }
+                
+            default:
+                ImageProcessor().processImage(sourceImage: srcImage, filter: .fade) { image in
+                    cartoon.image = image!
+                }
+            }
+            
             cell.cartoon = cartoon
-            
             return cell
         }
-        
-
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -182,19 +195,13 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-
 }
 
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileTableHederView.self)) as? ProfileTableHederView else {return nil}
-//
-        
         
             return headerView
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -241,9 +248,8 @@ extension ProfileViewController: UITableViewDelegate {
                 width: self.view.frame.width,
                 height: self.view.frame.width)
             self.secondAvatar.layer.cornerRadius = 0
-            
-            
                }
+        
         let doCancelButton = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
 
             self.headerView.addSubview(self.closeButton)
@@ -259,22 +265,16 @@ extension ProfileViewController: UITableViewDelegate {
         
         backgroundAnimation.startAnimation()
         doCancelButton.startAnimation(afterDelay: 0.5)
-        
     }
-    
     
     @objc func closeFunc() {
         let         backImageAnimation = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
             self.secondAvatar.frame = .init(x: 16, y: 16, width: 100, height: 100)
             self.secondAvatar.layer.cornerRadius = 50
             
-            
-//            self.secondAvatar.alpha = 1
             self.transptView.alpha = 0
             self.closeButton.alpha = 0
          }
-        
-        
         backImageAnimation.startAnimation()
     }
 }
