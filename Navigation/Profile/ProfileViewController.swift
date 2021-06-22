@@ -10,6 +10,19 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    let userService: UserService
+    let userName: String
+    
+    init(userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let headerView = ProfileTableHederView()
     
     
@@ -189,12 +202,11 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileTableHederView.self)) as? ProfileTableHederView else {return nil}
-//
+        headerView.labelName.text = userService.getUserObject(name: userName).fullName
+        headerView.labelStatus.text = userService.getUserObject(name: userName).status
+        headerView.image.image = userService.getUserObject(name: userName).avatar
         
-        
-            return headerView
-
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -216,7 +228,7 @@ extension ProfileViewController: UITableViewDelegate {
             return .zero
         }
     }
-
+    
 //   MARK: Функции
     
     @objc func tap() {
@@ -267,13 +279,9 @@ extension ProfileViewController: UITableViewDelegate {
         let         backImageAnimation = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
             self.secondAvatar.frame = .init(x: 16, y: 16, width: 100, height: 100)
             self.secondAvatar.layer.cornerRadius = 50
-            
-            
-//            self.secondAvatar.alpha = 1
             self.transptView.alpha = 0
             self.closeButton.alpha = 0
          }
-        
         
         backImageAnimation.startAnimation()
     }
