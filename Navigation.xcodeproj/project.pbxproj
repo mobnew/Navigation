@@ -28,6 +28,8 @@
 		94A76D6C26304787005270FC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A76D6B26304787005270FC /* PhotosTableViewCell.swift */; };
 		94A76D6F2630A549005270FC /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A76D6E2630A549005270FC /* PhotosViewController.swift */; };
 		94AD1DA6262875CA007471E2 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94AD1DA5262875CA007471E2 /* ProfileTableHederView.swift */; };
+		94F7250826875D50001182D7 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F7250726875D50001182D7 /* LoginFactory.swift */; };
+		94F7250A26876045001182D7 /* MyLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F7250926876045001182D7 /* MyLoginFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		94A76D6B26304787005270FC /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		94A76D6E2630A549005270FC /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		94AD1DA5262875CA007471E2 /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
+		94F7250726875D50001182D7 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		94F7250926876045001182D7 /* MyLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,8 @@
 				94A54040268738D0007259C4 /* Checker.swift */,
 				94A54042268739FB007259C4 /* LoginViewControllerDelegate.swift */,
 				94A5404426873A8F007259C4 /* LoginInspector.swift */,
+				94F7250726875D50001182D7 /* LoginFactory.swift */,
+				94F7250926876045001182D7 /* MyLoginFactory.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 			files = (
 				94A76D6C26304787005270FC /* PhotosTableViewCell.swift in Sources */,
 				94A76D6F2630A549005270FC /* PhotosViewController.swift in Sources */,
+				94F7250A26876045001182D7 /* MyLoginFactory.swift in Sources */,
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
 				94AD1DA6262875CA007471E2 /* ProfileTableHederView.swift in Sources */,
 				945728CE2631C711004D46AA /* PhotosCollectionViewCell.swift in Sources */,
@@ -216,6 +223,7 @@
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,
 				94A54041268738D0007259C4 /* Checker.swift in Sources */,
 				9417AA11262757D1009C3683 /* ProfileTableViewCell.swift in Sources */,
+				94F7250826875D50001182D7 /* LoginFactory.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
