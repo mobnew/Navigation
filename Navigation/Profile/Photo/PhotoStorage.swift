@@ -34,4 +34,30 @@ struct PhotoStorage {
         UIImageView(image: #imageLiteral(resourceName: "image-20")),
 
     ]
+    
+static let collectionModelObserver = [
+
+
+        UIImage(named: "image-1"),
+        UIImage(named: "image-2"),
+        UIImage(named: "image-3"),
+        UIImage(named: "image-4"),
+        UIImage(named: "image-5"),
+        UIImage(named: "image-6"),
+        UIImage(named: "image-7"),
+        UIImage(named: "image-8"),
+        UIImage(named: "image-9"),
+        UIImage(named: "image-10"),
+        UIImage(named: "image-11"),
+        UIImage(named: "image-12"),
+        UIImage(named: "image-13"),
+        UIImage(named: "image-14"),
+        UIImage(named: "image-15"),
+        UIImage(named: "image-16"),
+        UIImage(named: "image-17"),
+        UIImage(named: "image-18"),
+        UIImage(named: "image-19"),
+        UIImage(named: "image-20"),
+
+    ]
 }
