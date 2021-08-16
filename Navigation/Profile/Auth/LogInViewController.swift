@@ -10,6 +10,7 @@ import UIKit
 
 class LogInViewController: UIViewController {
       
+    var delegate: LoginViewControllerDelegate?
     
     //MARK: - SUbviews create
     let scrollView : UIScrollView = {
@@ -192,12 +193,20 @@ class LogInViewController: UIViewController {
     }
 
     @objc func pushTheButton() {
+        let loginField = emailField.text ?? "no user"
+        let pswdField = passField.text ?? ""
+        
         #if DEBUG
-        let profileViewController = ProfileViewController(userService: TestUserService(), userName: emailField.text ?? "no user")
-        #else
-        let profileViewController = ProfileViewController(userService: CurrentUserService(), userName: emailField.text ?? "no user")
-        #endif
+        let profileViewController = ProfileViewController(userService: TestUserService(), userName: loginField)
             navigationController?.pushViewController(profileViewController, animated: true)
+        #else
+        if delegate?.checkAuthData(user: loginField, pass: pswdField) == true  {
+        let profileViewController = ProfileViewController(userService: CurrentUserService(), userName: loginField)
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            print("Wrong creds")
+        }
+        #endif
         }
 }
 
