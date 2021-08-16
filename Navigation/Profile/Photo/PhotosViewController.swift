@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import iOSIntPackage
 
-class PhotosViewController: UIViewController {
-
+class PhotosViewController: UIViewController, ImageLibrarySubscriber {
+    
+    var imagePublisherFacade = ImagePublisherFacade()
+    var receivedImages: [UIImage] = []
+    
+    func receive(images: [UIImage]) {
+        receivedImages = images
+        collectView.reloadData()
+    }
+    
     private let cellID = "cell"
     
     private let collectView: UICollectionView = {
@@ -42,6 +51,8 @@ class PhotosViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate(constraints)
+        
+        imagePublisherFacade.subscribe(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,28 +60,30 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-
-    
-
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        imagePublisherFacade.removeSubscription(for: self)
+        imagePublisherFacade.rechargeImageLibrary()
+    }
 }
 
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return PhotoStorage.collectionModel.count
+        return receivedImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PhotosCollectionViewCell
         
-        myCell.photoView.image = PhotoStorage.collectionModel[indexPath.row].image
+        myCell.photoView.image = receivedImages[indexPath.row]
         
         return myCell
     }
-    
 }
     
-    
+
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: (collectionView.bounds.width - 32) / 3, height: (collectionView.bounds.width - 32) / 3)

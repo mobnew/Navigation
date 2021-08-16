@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
@@ -71,35 +72,24 @@ class ProfileViewController: UIViewController {
             width: 100,
             height: 100)
         image.alpha = 0
-
-        //image.translatesAutoresizingMaskIntoConstraints = false
-        
         
         return image
     }()
-    
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let reuseId = "cell"
     private let newID = "newID"
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         setupConstraints()
         setupTableView()
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        
         
         headerView.image.isUserInteractionEnabled = true
         
@@ -115,14 +105,11 @@ class ProfileViewController: UIViewController {
         tableView.register(ProfileTableHederView.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileTableHederView.self))
         
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: newID)
-        
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: reuseId)
-
         
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
     
     private func setupConstraints() {
         view.addSubview(tableView)
@@ -133,12 +120,10 @@ class ProfileViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
-   
 }
 
 //MARK: Расширения
@@ -159,7 +144,6 @@ extension ProfileViewController: UITableViewDataSource {
         }
         
         return section
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -168,14 +152,9 @@ extension ProfileViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: newID, for: indexPath) as! PhotosTableViewCell
             
-            
             return cell
             
-        }
-        
-        
-        else {
-            
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as! ProfileTableViewCell
             
             let cartoon = Storage.tableModel[indexPath.row]
@@ -183,9 +162,6 @@ extension ProfileViewController: UITableViewDataSource {
             
             return cell
         }
-        
-
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -195,10 +171,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-
 }
-
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -213,12 +186,18 @@ extension ProfileViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 0 {
+            var imageArray: [UIImage] = []
+            PhotoStorage.collectionModelObserver.forEach { i in
+                imageArray.append(i!)
+                    }
             let photoVC = PhotosViewController()
-            navigationController?.pushViewController(photoVC, animated: true)
             
+            photoVC.imagePublisherFacade = ImagePublisherFacade()
+            photoVC.imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 30, userImages: imageArray)
+           
+            navigationController?.pushViewController(photoVC, animated: true)
         }
     }
-    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
@@ -267,24 +246,19 @@ extension ProfileViewController: UITableViewDelegate {
                 width: 50,
                 height: 50)
         }
-               
         
         backgroundAnimation.startAnimation()
         doCancelButton.startAnimation(afterDelay: 0.5)
-        
     }
     
-    
     @objc func closeFunc() {
-        let         backImageAnimation = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
+        let backImageAnimation = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
             self.secondAvatar.frame = .init(x: 16, y: 16, width: 100, height: 100)
             self.secondAvatar.layer.cornerRadius = 50
             self.transptView.alpha = 0
             self.closeButton.alpha = 0
-         }
+        }
         
         backImageAnimation.startAnimation()
     }
 }
-
-
