@@ -114,7 +114,6 @@ class LogInViewController: UIViewController {
         containerEmailPassView.addSubview(emailField)
         containerEmailPassView.addSubview(passField)
         
-        
         // MARK: - constraints
         let constraints = [
             
@@ -159,13 +158,8 @@ class LogInViewController: UIViewController {
             passField.leadingAnchor.constraint(equalTo: emailField.leadingAnchor),
             passField.trailingAnchor.constraint(equalTo: emailField.trailingAnchor),
             passField.bottomAnchor.constraint(equalTo: containerEmailPassView.bottomAnchor)
-            
-          
         ]
-        
         NSLayoutConstraint.activate(constraints)
-
-        
     }
     
     // MARK: Keyboard notifications
@@ -198,13 +192,13 @@ class LogInViewController: UIViewController {
     }
 
     @objc func pushTheButton() {
-           let profileViewController = ProfileViewController()
+        #if DEBUG
+        let profileViewController = ProfileViewController(userService: TestUserService(), userName: emailField.text ?? "no user")
+        #else
+        let profileViewController = ProfileViewController(userService: CurrentUserService(), userName: emailField.text ?? "no user")
+        #endif
             navigationController?.pushViewController(profileViewController, animated: true)
         }
-        
-    
-    
-   
 }
 
 extension UIImage {

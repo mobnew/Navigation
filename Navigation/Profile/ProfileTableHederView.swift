@@ -19,11 +19,9 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
             return profileHV
         }()
     
-    
      let image: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        image.image = UIImage(named: "homer")
         
         image.layer.cornerRadius = 100 / 2
         image.clipsToBounds = true
@@ -37,10 +35,8 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         return image
     }()
     
-    
-    private let labelName: UILabel = {
+     let labelName: UILabel = {
         let labelName = UILabel()
-        labelName.text = "Homer Simpson"
         labelName.font = UIFont.boldSystemFont(ofSize: 18)
         labelName.textColor = .black
         labelName.textAlignment = .left
@@ -68,9 +64,8 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
     }()
     
     
-    private let labelStatus: UILabel = {
+    let labelStatus: UILabel = {
         let labelStatus = UILabel()
-        labelStatus.text = "Waiting for something..."
         labelStatus.font = UIFont.systemFont(ofSize: 14)
         labelStatus.textColor = .darkGray
         labelStatus.textAlignment = .left
@@ -104,17 +99,12 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
            super.init(reuseIdentifier: reuseIdentifier)
         
-        
         contentView.addSubview(profileHeaderView)
         profileHeaderView.addSubview(image)
         profileHeaderView.addSubview(labelName)
         profileHeaderView.addSubview(button)
         profileHeaderView.addSubview(textField)
         profileHeaderView.addSubview(labelStatus)
-        
-        
-        
-        
         
         let constraints = [
             profileHeaderView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -145,11 +135,7 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
             labelStatus.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -16)
             
         ]
-        
         NSLayoutConstraint.activate(constraints)
-        
-        
-        
        }
        
 
@@ -166,10 +152,4 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         statusText = textField.text ?? "No text"
         
     }
-    
-    
 }
-
-
-
-
