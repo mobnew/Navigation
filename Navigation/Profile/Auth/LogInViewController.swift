@@ -10,7 +10,8 @@ import UIKit
 
 class LogInViewController: UIViewController {
       
-    var delegate: LoginViewControllerDelegate?
+    var delegate: LoginViewControllerDelegate? = MyLoginFactory().getLoginInspector()
+    
     
     //MARK: - SUbviews create
     let scrollView : UIScrollView = {

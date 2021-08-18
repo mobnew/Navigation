@@ -12,58 +12,54 @@ final class FeedViewController: UIViewController {
     
     let post: Post = Post(title: "Пост")
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        print(type(of: self), #function)
-    }
+    let firstButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Button one", for: .normal)
+        button.sizeToFit()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pressOne), for: .touchUpInside)
+        
+        
+        return button
+    }()
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print(type(of: self), #function)
-    }
+    let secondButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Button two", for: .normal)
+        button.sizeToFit()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(pressTwo), for: .touchUpInside)
+        
+        return button
+    }()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        print(type(of: self), #function)
+        view.backgroundColor = .systemGreen
+        title = "Feed"
+        
+        view.addSubview(firstButton)
+        view.addSubview(secondButton)
+        
+        let constraints = [
+            firstButton.topAnchor.constraint(equalTo: view.centerYAnchor ,constant: 15),
+            firstButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            secondButton.topAnchor.constraint(equalTo: firstButton.bottomAnchor, constant: 10),
+            secondButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(type(of: self), #function)
+    @objc func pressOne() {
+        let postVC = PostViewController()
+        postVC.post = post
+        self.show(postVC, sender: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print(type(of: self), #function)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print(type(of: self), #function)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "post" else {
-            return
-        }
-        guard let postViewController = segue.destination as? PostViewController else {
-            return
-        }
-        postViewController.post = post
+    @objc func pressTwo() {
+        let postVC = PostViewController()
+        postVC.post = Post(title: "Post")
+        self.show(postVC, sender: nil)
     }
 }
