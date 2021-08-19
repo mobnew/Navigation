@@ -22,6 +22,7 @@
 		9417AA11262757D1009C3683 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9417AA10262757D1009C3683 /* ProfileTableViewCell.swift */; };
 		945728CE2631C711004D46AA /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945728CD2631C711004D46AA /* PhotosCollectionViewCell.swift */; };
 		945728D22631DA9C004D46AA /* PhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945728D12631DA9C004D46AA /* PhotoStorage.swift */; };
+		945962DC26CE29CF007816DD /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945962DB26CE29CF007816DD /* CustomButton.swift */; };
 		9490C8FA2689DDE5001057B7 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 9490C8F92689DDE5001057B7 /* iOSIntPackage */; };
 		949ADF542681D9C300F304DF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949ADF532681D9C300F304DF /* User.swift */; };
 		949E34E6261F3DAE0023EAC3 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949E34E5261F3DAE0023EAC3 /* LogInViewController.swift */; };
@@ -53,6 +54,7 @@
 		9417AA10262757D1009C3683 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		945728CD2631C711004D46AA /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		945728D12631DA9C004D46AA /* PhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStorage.swift; sourceTree = "<group>"; };
+		945962DB26CE29CF007816DD /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		949ADF532681D9C300F304DF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		949E34E5261F3DAE0023EAC3 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		94A54040268738D0007259C4 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				060782BC250CE27A00A87020 /* LaunchScreen.storyboard */,
 				060782BF250CE27A00A87020 /* Info.plist */,
 				060782C5250CEB0A00A87020 /* InfoViewController.swift */,
+				945962DB26CE29CF007816DD /* CustomButton.swift */,
 				949ADF532681D9C300F304DF /* User.swift */,
 				060782C7250CEE5D00A87020 /* PostViewController.swift */,
 				060782C9250CEE7200A87020 /* Post.swift */,
@@ -254,6 +257,7 @@
 				060782CA250CEE7200A87020 /* Post.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,
 				94A54041268738D0007259C4 /* Checker.swift in Sources */,
+				945962DC26CE29CF007816DD /* CustomButton.swift in Sources */,
 				9417AA11262757D1009C3683 /* ProfileTableViewCell.swift in Sources */,
 				94F7250826875D50001182D7 /* LoginFactory.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,

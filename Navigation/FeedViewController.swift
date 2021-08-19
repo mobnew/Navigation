@@ -12,23 +12,14 @@ final class FeedViewController: UIViewController {
     
     let post: Post = Post(title: "Пост")
     
-    let firstButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Button one", for: .normal)
-        button.sizeToFit()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pressOne), for: .touchUpInside)
-        
+    lazy var firstButton: CustomButton = {
+        let button = CustomButton(title: "One Button", titleColor: .systemBlue, onTap: pressOne)
         
         return button
     }()
     
-    let secondButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Button two", for: .normal)
-        button.sizeToFit()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(pressTwo), for: .touchUpInside)
+    lazy var secondButton: CustomButton = {
+        let button = CustomButton(title: "Two Button", titleColor: .systemBlue, onTap: pressTwo)
         
         return button
     }()
@@ -51,13 +42,13 @@ final class FeedViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     
-    @objc func pressOne() {
+    func pressOne() {
         let postVC = PostViewController()
         postVC.post = post
         self.show(postVC, sender: nil)
     }
     
-    @objc func pressTwo() {
+    func pressTwo() {
         let postVC = PostViewController()
         postVC.post = Post(title: "Post")
         self.show(postVC, sender: nil)

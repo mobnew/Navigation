@@ -46,16 +46,11 @@ class LogInViewController: UIViewController {
         return containerEmailPassView
     }()
     
-    
-    let button: UIButton = {
-        let button = UIButton(type: .system)
+    lazy var button: CustomButton = {
+        let button = CustomButton(title: "Log in", titleColor: .white, onTap: pushTheButton)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(1), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(pushTheButton), for: .touchUpInside)
         
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
@@ -193,7 +188,8 @@ class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
 
-    @objc func pushTheButton() {
+   
+    func pushTheButton() {
         let loginField = emailField.text ?? "no user"
         let pswdField = passField.text ?? ""
         
