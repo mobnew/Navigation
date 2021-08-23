@@ -12,7 +12,7 @@ import iOSIntPackage
 class PhotosViewController: UIViewController, ImageLibrarySubscriber {
     
     var imagePublisherFacade = ImagePublisherFacade()
-    var receivedImages: [UIImage] = []
+    private var receivedImages: [UIImage] = []
     
     func receive(images: [UIImage]) {
         receivedImages = images

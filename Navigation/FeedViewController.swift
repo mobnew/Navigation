@@ -10,7 +10,7 @@ import UIKit
 
 final class FeedViewController: UIViewController {
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
         label.text = "unknown"
@@ -20,7 +20,7 @@ final class FeedViewController: UIViewController {
         return label
     }()
     
-    let textfield: CustomTextField = {
+    private let textfield: CustomTextField = {
        let tf = CustomTextField(sizeOfText: 17, placeHolder: "Check pass...")
         tf.layer.borderWidth = 1
         tf.layer.borderColor = UIColor.black.cgColor
@@ -28,8 +28,9 @@ final class FeedViewController: UIViewController {
         return tf
     }()
     
-    lazy var checkButton: CustomButton = {
-        let button = CustomButton(title: "Check Button", titleColor: .systemBlue, onTap: pressTwo)
+    private lazy var checkButton: CustomButton = {
+        let button = CustomButton(title: "Check Button", titleColor: .systemBlue) {
+            [weak self] in self?.pressTwo() }
         
         return button
     }()
@@ -60,7 +61,7 @@ final class FeedViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func pressTwo() {
+    private func pressTwo() {
         
         if textfield.text!.count < 1 {
             label.text = "empty"
@@ -69,12 +70,12 @@ final class FeedViewController: UIViewController {
         else {model().checkWord(word: textfield.text!)}
     }
     
-    @objc func okFunc() {
+    @objc private func okFunc() {
         label.text = "OK"
         label.textColor = .systemGreen
     }
     
-    @objc func wrongFunc() {
+    @objc private func wrongFunc() {
         label.text = "Wrong"
         label.textColor = .systemRed
     }

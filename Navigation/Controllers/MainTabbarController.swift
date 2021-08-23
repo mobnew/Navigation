@@ -19,11 +19,11 @@ class MainTabbarController: UITabBarController {
         
         view.backgroundColor = .white
         
-        let firstVC = FeedNaviController()
+        let firstVC = UINavigationController(rootViewController: FeedViewController())
         let icon1 = UITabBarItem(title: "Feed", image: UIImage(systemName: "house.fill"), selectedImage: UIImage(systemName: "house.fill"))
         firstVC.tabBarItem = icon1
         
-        let secondVC = PostNaviController()
+        let secondVC = UINavigationController(rootViewController: LogInViewController())
         let icon2 = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), selectedImage: UIImage(systemName: "person.fill"))
         secondVC.tabBarItem = icon2
         self.viewControllers = [firstVC,secondVC]

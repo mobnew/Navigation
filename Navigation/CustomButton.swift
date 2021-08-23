@@ -10,7 +10,7 @@ import UIKit
 
 class CustomButton: UIButton {
 
-    var onTap: (() -> Void)
+    private var onTap: (() -> Void)
     
     init(title: String, titleColor: UIColor, onTap: @escaping (() -> Void)) {
         self.onTap = onTap

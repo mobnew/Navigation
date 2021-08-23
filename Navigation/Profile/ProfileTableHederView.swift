@@ -11,7 +11,7 @@ import UIKit
 
 class ProfileTableHederView: UITableViewHeaderFooterView {
     
-     let profileHeaderView: UIView = {
+     private let profileHeaderView: UIView = {
             let profileHV = UIView()
             profileHV.backgroundColor = .lightGray
             profileHV.translatesAutoresizingMaskIntoConstraints = false
@@ -45,8 +45,8 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
         return labelName
     }()
     
-    lazy var button: CustomButton = {
-        let button = CustomButton(title: "Set status", titleColor: .white, onTap: buttonPressed)
+    private lazy var button: CustomButton = {
+        let button = CustomButton(title: "Set status", titleColor: .white) { [weak self] in self?.buttonPressed()}
         button.backgroundColor = .systemBlue
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
@@ -137,7 +137,7 @@ class ProfileTableHederView: UITableViewHeaderFooterView {
            fatalError("init(coder:) has not been implemented")
        }
     
-    func buttonPressed() {
+    private func buttonPressed() {
         labelStatus.text = statusText
         
     }
