@@ -11,8 +11,8 @@ import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
-    let userService: UserService
-    let userName: String
+    private let userService: UserService
+    private let userName: String
     
     init(userService: UserService, userName: String) {
         self.userService = userService
@@ -210,7 +210,7 @@ extension ProfileViewController: UITableViewDelegate {
     
 //   MARK: Функции
     
-    @objc func tap() {
+    @objc private func tap() {
 
         let backgroundAnimation = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
                    
@@ -251,7 +251,7 @@ extension ProfileViewController: UITableViewDelegate {
         doCancelButton.startAnimation(afterDelay: 0.5)
     }
     
-    @objc func closeFunc() {
+    @objc private func closeFunc() {
         let backImageAnimation = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
             self.secondAvatar.frame = .init(x: 16, y: 16, width: 100, height: 100)
             self.secondAvatar.layer.cornerRadius = 50

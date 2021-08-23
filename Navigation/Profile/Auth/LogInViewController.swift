@@ -10,23 +10,24 @@ import UIKit
 
 class LogInViewController: UIViewController {
       
-    var delegate: LoginViewControllerDelegate?
+    var delegate: LoginViewControllerDelegate? = MyLoginFactory().getLoginInspector()
+    
     
     //MARK: - SUbviews create
-    let scrollView : UIScrollView = {
+    private let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
-    let containerView: UIView = {
+    private let containerView: UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         return containerView
     }()
     
-    let imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "logo")
@@ -34,7 +35,7 @@ class LogInViewController: UIViewController {
         return imageView
     }()
     
-    let containerEmailPassView: UIView = {
+    private let containerEmailPassView: UIView = {
         let containerEmailPassView = UIView()
         containerEmailPassView.translatesAutoresizingMaskIntoConstraints = false
         containerEmailPassView.layer.borderWidth = 0.5
@@ -45,16 +46,12 @@ class LogInViewController: UIViewController {
         return containerEmailPassView
     }()
     
-    
-    let button: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var button: CustomButton = {
+        let button = CustomButton(title: "Log in", titleColor: .white) {
+            [weak self] in self?.pushTheButton() }
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(1), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(pushTheButton), for: .touchUpInside)
         
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
@@ -64,7 +61,7 @@ class LogInViewController: UIViewController {
     }()
     
     
-    let separator: UIView = {
+    private let separator: UIView = {
        let separator = UIView()
         separator.translatesAutoresizingMaskIntoConstraints = false
         separator.layer.borderWidth = 0.25
@@ -73,7 +70,7 @@ class LogInViewController: UIViewController {
        return separator
     }()
     
-    let emailField: UITextField = {
+    private let emailField: UITextField = {
        let emailField = UITextField()
         emailField.translatesAutoresizingMaskIntoConstraints = false
         emailField.textColor = .black
@@ -85,7 +82,7 @@ class LogInViewController: UIViewController {
         return emailField
     }()
     
-    let passField: UITextField = {
+    private let passField: UITextField = {
        let passField = UITextField()
         passField.translatesAutoresizingMaskIntoConstraints = false
         passField.textColor = .black
@@ -192,7 +189,8 @@ class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
 
-    @objc func pushTheButton() {
+   
+    private func pushTheButton() {
         let loginField = emailField.text ?? "no user"
         let pswdField = passField.text ?? ""
         
